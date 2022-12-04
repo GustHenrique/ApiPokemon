@@ -72,16 +72,54 @@ namespace PokemonController.Controllers
                     System.IO.File.WriteAllText(FilePath, Dados);
                 }
 
+
             }
         }
-    }
+
+        [HttpDelete(Name = "DeletarPokemon")]
+        public void DeletePokemon([FromBody] Pokemon pokemon)
+        {
+            if (pokemon != null)
+            {
+                string FilePath = System.AppDomain.CurrentDomain.BaseDirectory + "/Data/Pokemons.json";
+                string PokemonData = System.IO.File.ReadAllText(FilePath);
+
+                if (!string.IsNullOrEmpty(PokemonData))
+                {
+                    IList<Pokemon> lista = new List<Pokemon>();
+                    lista = Newtonsoft.Json.JsonConvert.DeserializeObject<IList<Pokemon>>(PokemonData);
+
+                    for (int i = 0; i < lista.Count; i++)
+                    {
+                        Pokemon item = lista[i];
+
+                        if (item.Number == pokemon.Number)
+                        {
+                            lista[i] = pokemon;
+                            lista.Remove(lista[i]);
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                    string Dados = Newtonsoft.Json.JsonConvert.SerializeObject(lista);
+                    System.IO.File.WriteAllText(FilePath, Dados);
+
+                }
+
+            }
+        }
+}
 
     public class Pokemon
     {
-        public string Name { get; set; }
-        public string Type { get; set; }
+        public string? Name { get; set; }
+        public string? Type { get; set; }
         public string? Evolution { get; set; }
-        public string Weaknesses { get; set; }
+        public string? Weaknesses { get; set; }
         public int Number { get; set; }
     }
 
