@@ -2,14 +2,15 @@
 Api pokemon em c#
 
 Para facilitar, lista de pokemons para adicionar
-
-  {
+```json
+ {
     "name": "Bulbasaur"
     "type": "Grass, Poison"
     "evolution": "Ivysaur"
     "weaknesses": "Psychic, Ice, Fire, Flying"
     "number": 1
-  },
+  }
+  
   {
     "name": "Ivysaur"
     "type": "Grass, Poison"
@@ -45,3 +46,5 @@ Para facilitar, lista de pokemons para adicionar
     "weaknesses": "Water, Rock, Flying"
     "number": 637
   }
+```
+ 
